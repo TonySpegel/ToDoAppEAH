@@ -25,6 +25,9 @@ public class ToDoApp {
         final ToDo thirdEntry = new ToDo("Einkaufen",  "Ist genug Bier da?", null, "Trinkwart", STATE_OPEN);
         final Birthday aBirthday = new Birthday( "Michael Stepping", "Er mag 'Mon Chéri'", null );
 
+        newEntry.name Katze füttern
+        newEntry.deadline null
+
         // Add items to itemList
         itemList.add(newEntry);
         itemList.add(secondEntry);

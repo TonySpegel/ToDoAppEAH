@@ -41,6 +41,8 @@ public class ToDo extends Item {
     // Constructor
     public ToDo(final String name, final String description, Date deadline, String owner, int state) {
         super( description, name );
+
+        // Properties von hier in ToDo
         this.deadline = deadline;
         this.owner = owner;
         this.state = state;
