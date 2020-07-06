@@ -17,6 +17,8 @@ public class ToDoApp {
     public static void main(String[] args) {
         printWelcome();
 
+        printHelp();
+
         //load list of Items
 
 
@@ -41,7 +43,7 @@ public class ToDoApp {
             //String choice = "";
             String choice = "";
 
-            System.out.println("\nBitte geben Sie einen Buchstaben ein: 'h' für Hilfe.");
+            System.out.println("\nBitte geben Sie einen Buchstaben ein: ");
             //Scanner
             // a) neuere Methode
             Scanner usrInput = new Scanner(System.in);

@@ -5,9 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Birthday extends Item {
-
     final static String TAG = "Birthday";
-
+    //convert String to Date
+    final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     // from superclass
     //name
     //description
@@ -20,7 +20,7 @@ public class Birthday extends Item {
     //constructor
     public Birthday(final String name, final String description, final Date birthday) {
 
-        super(name,description);
+        super(name, description);
         this.birthday = birthday;
     }
 
@@ -32,12 +32,8 @@ public class Birthday extends Item {
         this.birthday = birthday;
     }
 
-
-    //convert String to Date
-    final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
     // format: TT.MM.JJ(JJ)
-    public void setBirthday( final String sBirthday ) throws InvalidDateException {
+    public void setBirthday(final String sBirthday) throws InvalidDateException {
         Date myBirthday = new Date();
 
         try {
@@ -47,20 +43,19 @@ public class Birthday extends Item {
             // Todo: Catch false dates
             // Will print: 'Unparseable date: "32.13.2020"'
             System.err.println(errorMessage.getMessage());
-            throw new InvalidDateException( );
+            throw new InvalidDateException();
         }
 
-        this.birthday = myBirthday ;
+        this.birthday = myBirthday;
     }
-
 
 
     public int getAge() {
 
-        //TODO Alter berechnen
-        //println( TAG, "setAge: %d", age);
+        // TODO Alter berechnen
+        // println( TAG, "setAge: %d", age);
 
-        //age: today - birthdate
+        // age: today - birthdate
         return 42;
     }
 

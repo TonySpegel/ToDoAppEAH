@@ -19,10 +19,7 @@ public class InvalidStateException extends Exception {
         super(cause);
     }
 
-    public InvalidStateException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace ) {
+    public InvalidStateException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
-
-
-
 }
