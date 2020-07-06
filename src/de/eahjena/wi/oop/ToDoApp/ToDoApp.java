@@ -15,15 +15,16 @@ public class ToDoApp {
 
     // main programm, beginning of life
     public static void main(String[] args) {
+        printWelcome();
 
         //load list of Items
 
 
         /* ------------------- DEMO ----------------- */
         final ToDo newEntry = new ToDo("Katze füttern", "Katzenfutter kaufen", null, "ich", STATE_OPEN);
-        final ToDo secondEntry = new ToDo("Aufräumen",  "Zimmer aufräumen", null, "WG Kollege", STATE_OPEN);
-        final ToDo thirdEntry = new ToDo("Einkaufen",  "Ist genug Bier da?", null, "Trinkwart", STATE_OPEN);
-        final Birthday aBirthday = new Birthday( "Michael Stepping", "Er mag 'Mon Chéri'", null );
+        final ToDo secondEntry = new ToDo("Aufräumen", "Zimmer aufräumen", null, "WG Kollege", STATE_OPEN);
+        final ToDo thirdEntry = new ToDo("Einkaufen", "Ist genug Bier da?", null, "Trinkwart", STATE_OPEN);
+        final Birthday aBirthday = new Birthday("Michael Stepping", "Er mag 'Mon Chéri'", null);
 
         // Add items to itemList
         itemList.add(newEntry);
@@ -33,13 +34,12 @@ public class ToDoApp {
         /* ------------------- DEMO ----------------- */
 
 
-
         // ask user for input
         while (true) {
 
             // Benutzereingaben abfragen
             //String choice = "";
-            String choice = new String("");
+            String choice = "";
 
             System.out.println("\nBitte geben Sie einen Buchstaben ein: 'h' für Hilfe.");
             //Scanner
@@ -86,10 +86,8 @@ public class ToDoApp {
             }
 
             // print the complete list
-            final String displayAllItems = printList( itemList );
-            System.out.println( displayAllItems );
-
-
+            final String displayAllItems = printList(itemList);
+            System.out.println(displayAllItems);
         }
     }
 
@@ -100,17 +98,17 @@ public class ToDoApp {
 
         // name
         System.out.println("Name des toDo's");
-        String name = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String name = usrInput.nextLine();
         todo.setName(name);
 
         // description
         System.out.println("Beschreibung");
-        String description = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String description = usrInput.nextLine();
         todo.setDescription(description);
 
         // deadline: Date
         System.out.println("Zu erledigen bis:");
-        String deadline = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String deadline = usrInput.nextLine();
         try {
             todo.setDeadline(deadline);
         } catch (final InvalidDateException e) {
@@ -119,23 +117,22 @@ public class ToDoApp {
 
         // owner
         System.out.println("Bearbeiter");
-        String owner = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String owner = usrInput.nextLine();
         todo.setOwner(owner);
 
         // state: enum
         try {
             todo.setState(STATE_OPEN);
         } catch (Exception e) {
-            ;
         }
 
         // alternative: erst alle Eingaben validieren und dann das Objekt erzeugen
         // ToDo todo1 = new ToDo( description, name, null /*deadline*/, owner, STATE_OPEN);
 
-        System.out.println( todo.toString() );
+        System.out.println(todo.toString());
 
         //add Item to List
-        itemList.add( todo );
+        itemList.add(todo);
     }
 
     private static void createBirthdayItem(Scanner usrInput) {
@@ -157,7 +154,7 @@ public class ToDoApp {
         System.out.println("Geburtstag: ");
         final String sBirthday = usrInput.nextLine();      //TODO nur ein Buchstabe????
         try {
-            birthday.setBirthday( sBirthday );
+            birthday.setBirthday(sBirthday);
         } catch (final InvalidDateException e) {
             e.printStackTrace();
         }
@@ -165,48 +162,18 @@ public class ToDoApp {
         // alternative: erst alle Eingaben validieren und dann das Objekt erzeugen
         // Birthday todo1 = new Birthday( description, name, null /*birthday*/);
 
-        System.out.println( birthday.toString() );
+        System.out.println(birthday.toString());
 
         //add Item to List
-        itemList.add( birthday );
+        itemList.add(birthday);
 
-
-
-    }
-
-    /*
-    + main()
-    + saveList()
-    + loadList()
-    + printHelp()
-     */
-
-
-    //save list
-    public void saveList(){
-
-    }
-
-    // load list
-    public void loadList() {
-
-    }
-
-    public static void printHelp() {
-        // Ausgabe der Tastaturkommandos
-        System.out.println("h: help");
-        System.out.println("b: create a birthday");
-        System.out.println("t: create a ToDo Item");
-        System.out.println("e: exit");
-
-        // ...
 
     }
 
     // Print items in itemList:
     // prozeduraler Aufruf!
-    public static String printList(final List<Item> itemList ) {
-
+    public static String printList(final List<Item> itemList) {
+        // String used to print all items in itemList
         String output = "";
 
         // Gehe durch alle Objekte Item durch und sage den Objekten, sie sollen sich anzeigen.
@@ -218,4 +185,33 @@ public class ToDoApp {
         return output;
     }
 
+    /**
+     * Prints welcome message on app start up
+     */
+    public static void printWelcome() {
+        System.out.println("+---------- ToDoApp EAH ----------+");
+        System.out.println("|   Manage things and birthdays   |");
+        System.out.println("+---------------------------------+");
+    }
+
+    /**
+     * Prints available commands
+     */
+    public static void printHelp() {
+        // Ausgabe der Tastaturkommandos
+        System.out.println("h: help");
+        System.out.println("b: create a birthday");
+        System.out.println("t: create a ToDo Item");
+        System.out.println("e: exit");
+    }
+
+    //save list
+    public void saveList() {
+
+    }
+
+    // load list
+    public void loadList() {
+
+    }
 }
