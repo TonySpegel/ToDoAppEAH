@@ -1,5 +1,6 @@
 package de.eahjena.wi.oop.ToDoApp;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,10 +14,12 @@ public class ToDoApp {
     // + itemList: List
     public static List<Item> itemList = new ArrayList<Item>(); //LinkedList
 
+    public static String FILENAME_DATASTORAGE = "TodoApp.csv" ;
+
     // main programm, beginning of life
     public static void main(String[] args) {
 
-        //load list of Items
+        loadItemsFromDisk();
 
 
         /* ------------------- DEMO ----------------- */
@@ -81,17 +84,22 @@ public class ToDoApp {
                 default: // ????
                     // Benutzerende
                     break;
-
-
             }
 
             // print the complete list
             final String displayAllItems = printList( itemList );
             System.out.println( displayAllItems );
 
-
+            // leave application
+            if (choice.equals("e"))
+                break;
         }
+
+        // end of application
+        saveItemsToDisk();
     }
+
+
 
     private static void createToDoItem(Scanner usrInput) {
         System.out.println("Bitte geben Sie folgende Daten ein:");
@@ -183,13 +191,58 @@ public class ToDoApp {
 
 
     //save list
-    public void saveList(){
+    private static void saveItemsToDisk() {
+        /* ********************************** */
+        // save list of items
+        PrintWriter outDatei = null;
+        try {
+            outDatei = new PrintWriter(new FileWriter(FILENAME_DATASTORAGE));
 
+            String output = "";
+            for (final Item item : itemList) {
+                // objektorientierte Nutzung
+                // sammele alle einzelnen Rückgaben in einem großen String
+                // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET"; \n
+                // Jeder einzelne Datensatz wird mit einem Zeilenumbruch beendet
+                output += item.save() + "\n";
+            }
+            // now we iterated through all objects and collected the output
+            // write all information finally to the file
+            outDatei.println( output );
+
+        } catch (final IOException exception) {
+            System.out.println( "Error in writing to file " + FILENAME_DATASTORAGE + ". Permisions?");
+
+        } finally {
+            if (outDatei != null) outDatei.close();
+        }
+        // end save list of items
+        /* ********************************** */
     }
 
     // load list
-    public void loadList() {
+    private static void loadItemsFromDisk() {
+        /* ********************************** */
+        //load list of Items from a CSV file
 
+        BufferedReader inDatei = null;
+
+        try {
+            inDatei = new BufferedReader(new FileReader( FILENAME_DATASTORAGE ));
+
+//                String l;
+//                while ((l = inDatei.readLine()) != null) {
+//                    (l);
+//                }
+        } catch ( IOException ioException ) {
+            System.out.println( "Konnte Datei "+FILENAME_DATASTORAGE+" nicht öffnen. Keine Objekte geladen.");
+        }
+        finally {
+            if (inDatei != null) try { inDatei.close(); } catch (IOException e ) {}
+        }
+
+        // end load list of items
+        /* ********************************** */
     }
 
     public static void printHelp() {
@@ -217,5 +270,7 @@ public class ToDoApp {
         }
         return output;
     }
+
+
 
 }

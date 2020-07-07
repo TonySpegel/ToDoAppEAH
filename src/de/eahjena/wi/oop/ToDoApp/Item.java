@@ -7,8 +7,8 @@ public class Item {
     final static String TAG = "Item";
 
     /* Attributes */
-    protected String description;
     protected String name;
+    protected String description;
 
     // default constructor
     public Item() {
@@ -36,6 +36,20 @@ public class Item {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    // Methods to generate a CSV string
+    // Eine virtuelle Methode! sollte abgeleitet werden.
+    public String save() {
+        String output = "";
+
+        // CSV Comma separated value
+        // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";
+        output += output + name + ";";
+        output += output + description + ";";
+
+        return output;
+    }
+
 
 
     // Methods to display the content in the proper way for the terminal

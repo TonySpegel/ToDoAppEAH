@@ -6,6 +6,8 @@ import java.util.Date;
 
 public class ToDo extends Item {
 
+    final static String TAG = "ToDo";
+
     // Properties ====================
     // Private properties ==========
     /*
@@ -46,6 +48,23 @@ public class ToDo extends Item {
         this.deadline = deadline;
         this.owner = owner;
         this.state = state;
+    }
+
+    // CSV Comma separated value
+    @Override
+    public String save() {
+        // which type we are
+        String output = TAG+";";
+
+        // parent data, here Item
+        output += super.save();
+
+        // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET";
+        output += deadline.toString() + ";";
+        output += owner + ";";
+        output += state + ";";
+
+        return output;
     }
 
 

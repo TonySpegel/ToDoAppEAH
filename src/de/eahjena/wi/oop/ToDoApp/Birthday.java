@@ -20,9 +20,24 @@ public class Birthday extends Item {
     //constructor
     public Birthday(final String name, final String description, final Date birthday) {
 
-        super(name,description);
+        super(name, description);
         this.birthday = birthday;
     }
+
+    // CSV Comma separated value
+    @Override
+    public String save() {
+        // which type we are
+        String output = TAG+";";
+
+        // parent data, here Item
+        output += super.save();
+
+        // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET";
+        output += birthday.toString() + ";";
+        return output;
+    }
+
 
     public Date getBirthday() {
         return birthday;
@@ -37,7 +52,7 @@ public class Birthday extends Item {
     final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
     // format: TT.MM.JJ(JJ)
-    public void setBirthday( final String sBirthday ) throws InvalidDateException {
+    public void setBirthday(final String sBirthday) throws InvalidDateException {
         Date myBirthday = new Date();
 
         try {
@@ -47,12 +62,11 @@ public class Birthday extends Item {
             // Todo: Catch false dates
             // Will print: 'Unparseable date: "32.13.2020"'
             System.err.println(errorMessage.getMessage());
-            throw new InvalidDateException( );
+            throw new InvalidDateException();
         }
 
-        this.birthday = myBirthday ;
+        this.birthday = myBirthday;
     }
-
 
 
     public int getAge() {
@@ -71,4 +85,5 @@ public class Birthday extends Item {
         //TODO Ausgabe
         return this.toString();
     }
+
 }
