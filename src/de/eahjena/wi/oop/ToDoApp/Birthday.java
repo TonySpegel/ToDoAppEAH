@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class Birthday extends Item {
     final static String TAG = "Birthday";
-    //convert String to Date
     final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     // from superclass
     //name
