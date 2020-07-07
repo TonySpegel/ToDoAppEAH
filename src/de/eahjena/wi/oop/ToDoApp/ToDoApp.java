@@ -96,7 +96,7 @@ public class ToDoApp {
             System.out.println( displayAllItems );
 
             // leave application
-            if (choice.equals("e"))
+            if ("e".equals(choice))
                 break;
         }
 
@@ -233,19 +233,21 @@ public class ToDoApp {
         BufferedReader inDatei = null;
 
         try {
-            inDatei = new BufferedReader(new FileReader( FILENAME_DATASTORAGE ));
+            inDatei = new BufferedReader(new FileReader(FILENAME_DATASTORAGE));
 
 //                String l;
 //                while ((l = inDatei.readLine()) != null) {
 //                    (l);
 //                }
-        } catch ( IOException ioException ) {
-            System.out.println( "Konnte Datei "+FILENAME_DATASTORAGE+" nicht öffnen. Keine Objekte geladen.");
+        } catch (IOException ioException) {
+            System.out.println("Konnte Datei " + FILENAME_DATASTORAGE + " nicht öffnen. Keine Objekte geladen.");
+        } finally {
+            if (inDatei != null) try {
+                inDatei.close();
+            } catch (IOException e) {
+            }
         }
-        finally {
-            if (inDatei != null) try { inDatei.close(); } catch (IOException e ) {}
-        }
-
+    }
         // end load list of items
         /* ********************************** */
 
