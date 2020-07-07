@@ -18,6 +18,9 @@ public class ToDoApp {
 
     // main programm, beginning of life
     public static void main(String[] args) {
+        printWelcome();
+
+        printHelp();
 
         loadItemsFromDisk();
 
@@ -42,7 +45,7 @@ public class ToDoApp {
 
             // Benutzereingaben abfragen
             //String choice = "";
-            String choice = new String("");
+            String choice = "";
 
             System.out.println("\nBitte geben Sie einen Buchstaben ein: 'h' für Hilfe.");
             //Scanner
@@ -84,6 +87,8 @@ public class ToDoApp {
                 default: // ????
                     // Benutzerende
                     break;
+
+
             }
 
             // print the complete list
@@ -97,7 +102,7 @@ public class ToDoApp {
 
         // end of application
         saveItemsToDisk();
-    }
+        }
 
 
 
@@ -108,17 +113,17 @@ public class ToDoApp {
 
         // name
         System.out.println("Name des toDo's");
-        String name = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String name = usrInput.nextLine();
         todo.setName(name);
 
         // description
         System.out.println("Beschreibung");
-        String description = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String description = usrInput.nextLine();
         todo.setDescription(description);
 
         // deadline: Date
         System.out.println("Zu erledigen bis:");
-        String deadline = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String deadline = usrInput.nextLine();
         try {
             todo.setDeadline(deadline);
         } catch (final InvalidDateException e) {
@@ -127,7 +132,7 @@ public class ToDoApp {
 
         // owner
         System.out.println("Bearbeiter");
-        String owner = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String owner = usrInput.nextLine();
         todo.setOwner(owner);
 
         // state: enum
@@ -153,17 +158,17 @@ public class ToDoApp {
 
         // name
         System.out.println("Geburtstagskind: ");
-        String name = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        String name = usrInput.nextLine();     
         birthday.setName(name);
 
         // description
         System.out.println("Geburtstagswünsche: ");
-        final String description = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        final String description = usrInput.nextLine();   
         birthday.setDescription(description);
 
         // birthday: Date
         System.out.println("Geburtstag: ");
-        final String sBirthday = usrInput.nextLine();      //TODO nur ein Buchstabe????
+        final String sBirthday = usrInput.nextLine();     
         try {
             birthday.setBirthday( sBirthday );
         } catch (final InvalidDateException e) {
@@ -243,23 +248,11 @@ public class ToDoApp {
 
         // end load list of items
         /* ********************************** */
-    }
-
-    public static void printHelp() {
-        // Ausgabe der Tastaturkommandos
-        System.out.println("h: help");
-        System.out.println("b: create a birthday");
-        System.out.println("t: create a ToDo Item");
-        System.out.println("e: exit");
-
-        // ...
-
-    }
 
     // Print items in itemList:
     // prozeduraler Aufruf!
     public static String printList(final List<Item> itemList ) {
-
+        // String used to print all items in itemList
         String output = "";
 
         // Gehe durch alle Objekte Item durch und sage den Objekten, sie sollen sich anzeigen.
@@ -271,6 +264,25 @@ public class ToDoApp {
         return output;
     }
 
+    /**
+     * Prints welcome message on app start up
+     */
+    public static void printWelcome() {
+        System.out.println("+---------- ToDoApp EAH ----------+");
+        System.out.println("|   Manage things and birthdays   |");
+        System.out.println("+---------------------------------+");
 
+    }
+
+    /**
+     * Prints available commands
+     */
+    public static void printHelp() {
+        // Ausgabe der Tastaturkommandos
+        System.out.println("h: help");
+        System.out.println("b: create a birthday");
+        System.out.println("t: create a ToDo Item");
+        System.out.println("e: exit");
+    }
 
 }

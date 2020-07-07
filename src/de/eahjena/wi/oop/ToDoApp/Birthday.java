@@ -5,9 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Birthday extends Item {
-
     final static String TAG = "Birthday";
-
+    //convert String to Date
+    final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     // from superclass
     //name
     //description
@@ -47,10 +47,6 @@ public class Birthday extends Item {
         this.birthday = birthday;
     }
 
-
-    //convert String to Date
-    final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
     // format: TT.MM.JJ(JJ)
     public void setBirthday(final String sBirthday) throws InvalidDateException {
         Date myBirthday = new Date();
@@ -71,10 +67,10 @@ public class Birthday extends Item {
 
     public int getAge() {
 
-        //TODO Alter berechnen
-        //println( TAG, "setAge: %d", age);
+        // TODO Alter berechnen
+        // println( TAG, "setAge: %d", age);
 
-        //age: today - birthdate
+        // age: today - birthdate
         return 42;
     }
 
