@@ -8,57 +8,51 @@ import java.util.Scanner;
 import static de.eahjena.wi.oop.ToDoApp.ToDo.STATE_OPEN;
 
 public class ToDoApp {
-
     final static String TAG = "ToDoApp";
+    /**
+     * Holds items
+     */
+    public static ArrayList<Item> itemList = new ArrayList<>();
+    /**
+     * Filename for storing items
+     */
+    public static String FILENAME_DATASTORAGE = "TodoApp.csv";
 
-    // + itemList: List
-    public static List<Item> itemList = new ArrayList<Item>(); //LinkedList
-
-    public static String FILENAME_DATASTORAGE = "TodoApp.csv" ;
-
-    // main programm, beginning of life
+    /**
+     * Main method. App entry
+     * ============================================
+     */
     public static void main(String[] args) {
         printWelcome();
-
         printHelp();
-
         loadItemsFromDisk();
 
-
-        /* ------------------- DEMO ----------------- */
+        /**
+         * Begin demo
+         * ============================================
+         */
         final ToDo newEntry = new ToDo("Katze füttern", "Katzenfutter kaufen", null, "ich", STATE_OPEN);
-        final ToDo secondEntry = new ToDo("Aufräumen",  "Zimmer aufräumen", null, "WG Kollege", STATE_OPEN);
-        final ToDo thirdEntry = new ToDo("Einkaufen",  "Ist genug Bier da?", null, "Trinkwart", STATE_OPEN);
-        final Birthday aBirthday = new Birthday( "Michael Stepping", "Er mag 'Mon Chéri'", null );
+        final ToDo secondEntry = new ToDo("Aufräumen", "Zimmer aufräumen", null, "WG Kollege", STATE_OPEN);
+        final ToDo thirdEntry = new ToDo("Einkaufen", "Ist genug Bier da?", null, "Trinkwart", STATE_OPEN);
+        final Birthday aBirthday = new Birthday("Michael Stepping", "Er mag 'Mon Chéri'", null);
 
         // Add items to itemList
         itemList.add(newEntry);
         itemList.add(secondEntry);
         itemList.add(thirdEntry);
         itemList.add(aBirthday);
-        /* ------------------- DEMO ----------------- */
+        // End demo
 
 
-
-        // ask user for input
+        /**
+         * Infinite loop to keep asking for user input
+         */
         while (true) {
+            System.out.println("\nBitte geben Sie einen Buchstaben ein: ");
 
-            // Benutzereingaben abfragen
-            //String choice = "";
             String choice = "";
-
-            System.out.println("\nBitte geben Sie einen Buchstaben ein: 'h' für Hilfe.");
-            //Scanner
-            // a) neuere Methode
             Scanner usrInput = new Scanner(System.in);
             choice = usrInput.nextLine();
-            //int squareLength = usr_input.nextInt();
-            // b) alte Methode
-            /*
-            InputStreamReader isr = new InputStreamReader(System.in);
-            BufferedReader br = new BufferedReader(isr);
-            String eingabe = br.readLine();
-            */
 
             System.out.println("User's choice: '" + choice + "'");
 
@@ -70,30 +64,27 @@ public class ToDoApp {
                     printHelp();
                     break;
 
-                //Create ToDo-Task
+                // Create ToDo-Task
                 case "t": {
                     createToDoItem(usrInput);
                     break;
                 }
 
-                //Create ToDo-Task
+                // Create Birthday
                 case "b": {
                     createBirthdayItem(usrInput);
                     break;
                 }
 
                 case "e":
-                case "":
-                default: // ????
+                default:
                     // Benutzerende
                     break;
-
-
             }
 
             // print the complete list
-            final String displayAllItems = printList( itemList );
-            System.out.println( displayAllItems );
+            final String displayAllItems = printList(itemList);
+            System.out.println(displayAllItems);
 
             // leave application
             if ("e".equals(choice))
@@ -102,8 +93,7 @@ public class ToDoApp {
 
         // end of application
         saveItemsToDisk();
-        }
-
+    }
 
 
     private static void createToDoItem(Scanner usrInput) {
@@ -139,16 +129,15 @@ public class ToDoApp {
         try {
             todo.setState(STATE_OPEN);
         } catch (Exception e) {
-            ;
         }
 
         // alternative: erst alle Eingaben validieren und dann das Objekt erzeugen
         // ToDo todo1 = new ToDo( description, name, null /*deadline*/, owner, STATE_OPEN);
 
-        System.out.println( todo.toString() );
+        System.out.println(todo.toString());
 
-        //add Item to List
-        itemList.add( todo );
+        // Add item to List
+        itemList.add(todo);
     }
 
     private static void createBirthdayItem(Scanner usrInput) {
@@ -158,19 +147,19 @@ public class ToDoApp {
 
         // name
         System.out.println("Geburtstagskind: ");
-        String name = usrInput.nextLine();     
+        String name = usrInput.nextLine();
         birthday.setName(name);
 
         // description
         System.out.println("Geburtstagswünsche: ");
-        final String description = usrInput.nextLine();   
+        final String description = usrInput.nextLine();
         birthday.setDescription(description);
 
         // birthday: Date
         System.out.println("Geburtstag: ");
-        final String sBirthday = usrInput.nextLine();     
+        final String sBirthday = usrInput.nextLine();
         try {
-            birthday.setBirthday( sBirthday );
+            birthday.setBirthday(sBirthday);
         } catch (final InvalidDateException e) {
             e.printStackTrace();
         }
@@ -178,24 +167,15 @@ public class ToDoApp {
         // alternative: erst alle Eingaben validieren und dann das Objekt erzeugen
         // Birthday todo1 = new Birthday( description, name, null /*birthday*/);
 
-        System.out.println( birthday.toString() );
+        System.out.println(birthday.toString());
 
-        //add Item to List
-        itemList.add( birthday );
-
+        // add birthday to itemList
+        itemList.add(birthday);
 
 
     }
 
-    /*
-    + main()
-    + saveList()
-    + loadList()
-    + printHelp()
-     */
-
-
-    //save list
+    // save list
     private static void saveItemsToDisk() {
         /* ********************************** */
         // save list of items
@@ -213,10 +193,10 @@ public class ToDoApp {
             }
             // now we iterated through all objects and collected the output
             // write all information finally to the file
-            outDatei.println( output );
+            outDatei.println(output);
 
         } catch (final IOException exception) {
-            System.out.println( "Error in writing to file " + FILENAME_DATASTORAGE + ". Permisions?");
+            System.out.println("Error in writing to file " + FILENAME_DATASTORAGE + ". Permisions?");
 
         } finally {
             if (outDatei != null) outDatei.close();
@@ -248,12 +228,12 @@ public class ToDoApp {
             }
         }
     }
-        // end load list of items
-        /* ********************************** */
+    // end load list of items
+    /* ********************************** */
 
     // Print items in itemList:
     // prozeduraler Aufruf!
-    public static String printList(final List<Item> itemList ) {
+    public static String printList(final List<Item> itemList) {
         // String used to print all items in itemList
         String output = "";
 

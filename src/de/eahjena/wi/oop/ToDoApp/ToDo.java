@@ -4,45 +4,39 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Repräsentiert ein simples ToDo.
+ * Dieses erweitert die Klasse Item.
+ */
 public class ToDo extends Item {
-
-    final static String TAG = "ToDo";
-
-    // Properties ====================
-    // Private properties ==========
-    /*
-    - deadline: Date
-    - owner: String
-    - state: integer (enum)
-    */
-    protected Date deadline;
-    protected String owner;
-    protected int state;
-    //protected enum state;
-
-    /* enum State */
-    //enum STATE ....
-
-    /*
-    enum State:
-    open = 0
-    assigned = 1
-    done = 9
-    */
-    /* in PHP, in C, C++ waere das adäquate Wort "const" */
+    /**
+     * Konstanten in Java:              final static
+     * In PHP, C, C++, JavaScript:      const
+     * <p>
+     * Die folgenden Konstanten repräsentieren den Zustand,
+     * den ein Item haben kann. Folgendes Konstrukt wird
+     * auch als Enum bezeichnet.
+     */
     public final static int STATE_OPEN = 0;
     public final static int STATE_ASSIGNED = 1;
     public final static int STATE_DRINKMORE_BEER = 2;
     public final static int STATE_DONE = 9;
 
+    final static String TAG = "ToDo";
+    final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+    protected Date deadline;
+    protected String owner;
+    protected int state;
+
+
     // default constructor
     public ToDo() {
     }
 
-
     // Constructor
     public ToDo(final String name, final String description, Date deadline, String owner, int state) {
-        super( description, name );
+        super(description, name);
 
         // Properties von hier in ToDo
         this.deadline = deadline;
@@ -54,7 +48,7 @@ public class ToDo extends Item {
     @Override
     public String save() {
         // which type we are
-        String output = TAG+";";
+        String output = TAG + ";";
 
         // parent data, here Item
         output += super.save();
@@ -67,19 +61,14 @@ public class ToDo extends Item {
         return output;
     }
 
-
-    /* methods */
     public Date getDeadline() {
         return deadline;
     }
 
-    final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
-    // format: TT.MM.JJ(JJ)
-    public void setDeadline( final String deadlineString ) throws InvalidDateException {
+    public void setDeadline(final String deadlineString) throws InvalidDateException {
         Date myDeadline = new Date();
 
-        //convert String to Date
+        // convert String to Date
         try {
             myDeadline = dateFormat.parse(deadlineString);
 
@@ -87,10 +76,10 @@ public class ToDo extends Item {
             // Todo: Catch false dates
             // Will print: 'Unparseable date: "32.13.2020"'
             System.err.println(errorMessage.getMessage());
-            throw new InvalidDateException( );
+            throw new InvalidDateException();
         }
 
-        this.deadline = myDeadline ;
+        this.deadline = myDeadline;
     }
 
     public void setDeadline(final Date deadline) {
@@ -110,12 +99,11 @@ public class ToDo extends Item {
     }
 
     public void setState(int state) throws InvalidStateException {
-
         // is the parameter a valid state?
-        if ( state == STATE_OPEN || state == STATE_ASSIGNED || state == STATE_DRINKMORE_BEER || state == STATE_DONE )
+        if (state == STATE_OPEN || state == STATE_ASSIGNED || state == STATE_DRINKMORE_BEER || state == STATE_DONE)
             this.state = state;
         else
-            throw ( new InvalidStateException( Integer.toString(state) ));
+            throw (new InvalidStateException(Integer.toString(state)));
 
     }
 
@@ -128,7 +116,7 @@ public class ToDo extends Item {
 
     @Override
     public String toString() {
-        //do not forget the output of the parent clase        
+        // Do not forget the output of the parent class
         final String superText = super.toString();
         final String text = superText + "ToDo{" +
                 "deadline=" + deadline +
