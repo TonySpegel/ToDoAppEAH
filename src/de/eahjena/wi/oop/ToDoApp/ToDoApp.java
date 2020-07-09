@@ -8,11 +8,14 @@ import java.util.Scanner;
 import static de.eahjena.wi.oop.ToDoApp.ToDo.STATE_OPEN;
 
 public class ToDoApp {
+
     final static String TAG = "ToDoApp";
+
     /**
      * Holds items
      */
     public static ArrayList<Item> itemList = new ArrayList<>();
+
     /**
      * Filename for storing items
      */
@@ -79,6 +82,7 @@ public class ToDoApp {
                 case "e":
                 default:
                     // Benutzerende
+                    // leave switch, not yet the while loop
                     break;
             }
 
@@ -94,6 +98,7 @@ public class ToDoApp {
         // end of application
         saveItemsToDisk();
     }
+    /* end of main */
 
 
     private static void createToDoItem(Scanner usrInput) {
