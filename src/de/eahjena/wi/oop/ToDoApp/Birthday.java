@@ -87,4 +87,12 @@ public class Birthday extends Item {
         return this.toString();
     }
 
+    @Override
+    public String toString() {
+        final String superText = super.toString();
+        final String text = superText + "Birthday{" +
+                "birthday=" + birthday +
+                '}';
+        return text;
+    }
 }
