@@ -5,7 +5,9 @@ package de.eahjena.wi.oop.ToDoApp;
 public class Item {
 
     final static String TAG = "Item";
-
+    //Delimiter used in CSV file
+    final static String DELIMITER = ";";
+    
     /* Attributes */
     protected String name;
     protected String description;
@@ -21,6 +23,39 @@ public class Item {
         this.name = name;
     }
 
+    
+    
+    
+    // Factory pattern
+    static Item create( String CSVLineOfObject ) {
+        
+        // parse the line into parameters
+        // first columns is the name of the object
+    
+    
+        Item item = null;
+        
+        //Get all tokens available in line
+        String[] tokens = CSVLineOfObject.split(DELIMITER);
+        for(String token : tokens)
+        {
+            //Print all tokens
+            System.out.println(token);
+            
+            // je nach ObjectType instanziieren;
+            item = new Birthday();
+            item = new ToDo();
+        
+        }
+        
+
+        
+        
+        return item;
+    }
+    
+    
+    
     /* Methods */
     public void setName(String name) {
         this.name = name;

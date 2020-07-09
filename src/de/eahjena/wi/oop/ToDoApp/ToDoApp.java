@@ -209,10 +209,17 @@ public class ToDoApp {
         try {
             inDatei = new BufferedReader(new FileReader(FILENAME_DATASTORAGE));
 
-//                String l;
-//                while ((l = inDatei.readLine()) != null) {
-//                    (l);
-//                }
+            String sCSVLineForObject;
+            // Zeilenweise die Eingabedatei einlesen
+            while ((sCSVLineForObject = inDatei.readLine()) != null) {
+                // Jede Zeile ist ein Objekt.
+                
+                // wir müssen hier das erste Element auslesen, damit wir wissen, welches Objekt wir instanziieren müssen.
+                // Eine kleine Factory.
+                Item item = Item.create( sCSVLineForObject );
+                
+                itemList.add( item );
+            }
         } catch (IOException ioException) {
             System.out.println("Konnte Datei " + FILENAME_DATASTORAGE + " nicht öffnen. Keine Objekte geladen.");
         } finally {
