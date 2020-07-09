@@ -54,7 +54,13 @@ public class ToDo extends Item {
         output += super.save();
 
         // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET";
-        output += deadline.toString() + ";";
+        if (deadline != null) {
+            output += deadline.toString();
+        } else {
+            output += "\"\"";
+        }
+        // Oneliner alternative: output += deadline != null ? deadline.toString() : "\"\"";
+        output += ";"; // The closing ";" for the deadline field
         output += owner + ";";
         output += state + ";";
 
