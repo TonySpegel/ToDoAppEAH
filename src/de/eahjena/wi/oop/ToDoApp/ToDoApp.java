@@ -53,30 +53,25 @@ public class ToDoApp {
         while (true) {
             System.out.println("\nBitte geben Sie einen Buchstaben ein: ");
 
-            String choice = "";
-            Scanner usrInput = new Scanner(System.in);
-            choice = usrInput.nextLine();
+            Scanner userInput = new Scanner(System.in);
+            String choice = userInput.nextLine();
 
             System.out.println("User's choice: '" + choice + "'");
 
             // Eingaben auswerten
             switch (choice) {
-
                 // help
-                case "h":
-                    printHelp();
-                    break;
-
+                case "h" -> printHelp();
                 // Create ToDo-Task
-                case "t": {
-                    createToDoItem(usrInput);
-                    break;
-                }
-
+                case "t" -> createToDoItem(userInput);
                 // Create Birthday
                 case "b" -> createBirthdayItem(userInput);
                 // case "e"
-                default -> { /* Benutzerende */ }
+                default -> {
+                    // Benutzerende
+                    // Only exiting switch statement.
+                    // Loop exit is checked later
+                }
             }
 
             // print the complete list
@@ -94,24 +89,24 @@ public class ToDoApp {
     /* end of main */
 
 
-    private static void createToDoItem(Scanner usrInput) {
+    private static void createToDoItem(Scanner userInput) {
         System.out.println("Bitte geben Sie folgende Daten ein:");
 
         ToDo todo = new ToDo();
 
         // name
         System.out.println("Name des toDo's");
-        String name = usrInput.nextLine();
+        String name = userInput.nextLine();
         todo.setName(name);
 
         // description
         System.out.println("Beschreibung");
-        String description = usrInput.nextLine();
+        String description = userInput.nextLine();
         todo.setDescription(description);
 
         // deadline: Date
         System.out.println("Zu erledigen bis:");
-        String deadline = usrInput.nextLine();
+        String deadline = userInput.nextLine();
         try {
             todo.setDeadline(deadline);
         } catch (final InvalidDateException e) {
@@ -120,7 +115,7 @@ public class ToDoApp {
 
         // owner
         System.out.println("Bearbeiter");
-        String owner = usrInput.nextLine();
+        String owner = userInput.nextLine();
         todo.setOwner(owner);
 
         // state: enum
@@ -138,24 +133,24 @@ public class ToDoApp {
         itemList.add(todo);
     }
 
-    private static void createBirthdayItem(Scanner usrInput) {
+    private static void createBirthdayItem(Scanner userInput) {
         System.out.println("Bitte geben Sie folgende Daten ein:");
 
         Birthday birthday = new Birthday();
 
         // name
         System.out.println("Geburtstagskind: ");
-        String name = usrInput.nextLine();
+        String name = userInput.nextLine();
         birthday.setName(name);
 
         // description
         System.out.println("Geburtstagswünsche: ");
-        final String description = usrInput.nextLine();
+        final String description = userInput.nextLine();
         birthday.setDescription(description);
 
         // birthday: Date
         System.out.println("Geburtstag: ");
-        final String sBirthday = usrInput.nextLine();
+        final String sBirthday = userInput.nextLine();
         try {
             birthday.setBirthday(sBirthday);
         } catch (final InvalidDateException e) {
