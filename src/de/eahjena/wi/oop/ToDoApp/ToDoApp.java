@@ -45,17 +45,18 @@ public class ToDoApp {
         itemList.add(thirdEntry);
         itemList.add(aBirthday);
         // End demo
-
-
+    
+        // we need only one instance
+        final Scanner userInput = new Scanner(System.in);
+    
+    
         /**
          * Infinite loop to keep asking for user input
          */
         while (true) {
             System.out.println("\nBitte geben Sie einen Buchstaben ein: ");
 
-            Scanner userInput = new Scanner(System.in);
-            String choice = userInput.nextLine();
-
+            final String choice = userInput.nextLine();
             System.out.println("User's choice: '" + choice + "'");
 
             // Eingaben auswerten
@@ -79,6 +80,7 @@ public class ToDoApp {
             System.out.println(displayAllItems);
 
             // leave application
+            //trick: "e" is a string, which is present. (choice) could be null.
             if ("e".equals(choice))
                 break;
         }
@@ -154,7 +156,8 @@ public class ToDoApp {
         try {
             birthday.setBirthday(sBirthday);
         } catch (final InvalidDateException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("Falsches Datum");
         }
 
         // alternative: erst alle Eingaben validieren und dann das Objekt erzeugen
@@ -164,8 +167,6 @@ public class ToDoApp {
 
         // add birthday to itemList
         itemList.add(birthday);
-
-
     }
 
     // save list
@@ -246,7 +247,6 @@ public class ToDoApp {
         System.out.println("+---------- ToDoApp EAH ----------+");
         System.out.println("|   Manage things and birthdays   |");
         System.out.println("+---------------------------------+");
-
     }
 
     /**
