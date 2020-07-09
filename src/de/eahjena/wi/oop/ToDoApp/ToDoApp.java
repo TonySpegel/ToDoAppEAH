@@ -64,13 +64,11 @@ public class ToDoApp {
                 case "t" -> createToDoItem(userInput);
                 // Create Birthday
                 case "b" -> createBirthdayItem(userInput);
+                // List all ToDos and Birthdays
+                case "l" -> listEntries();
                 // case "e"
                 default -> { /* Benutzerende */ }
             }
-
-            // print the complete list
-            final String displayAllItems = printList(itemList);
-            System.out.println(displayAllItems);
 
             // leave application
             if ("e".equals(choice))
@@ -79,6 +77,12 @@ public class ToDoApp {
 
         // end of application
         saveItemsToDisk();
+    }
+
+    private static void listEntries() {
+        final String displayAllItems = itemListToString(itemList);
+        System.out.println(displayAllItems);
+
     }
 
 
@@ -215,7 +219,7 @@ public class ToDoApp {
 
     // Print items in itemList:
     // prozeduraler Aufruf!
-    public static String printList(final List<Item> itemList) {
+    public static String itemListToString(final List<Item> itemList) {
         // String used to print all items in itemList
         StringBuilder output = new StringBuilder();
 
@@ -244,6 +248,7 @@ public class ToDoApp {
     public static void printHelp() {
         // Ausgabe der Tastaturkommandos
         System.out.println("h: help");
+        System.out.println("l: list all entries");
         System.out.println("b: create a birthday");
         System.out.println("t: create a ToDo Item");
         System.out.println("e: exit");

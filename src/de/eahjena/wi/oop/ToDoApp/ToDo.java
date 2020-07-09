@@ -115,9 +115,11 @@ public class ToDo extends Item {
 
     @Override
     public String display() {
-
-        //TODO Ausgabe
-        return this.toString();
+        return "(ToDo) " + this.name + ":" + "\n" +
+                "\t" + "Description: " + this.description + "\n" +
+                "\t" + "Deadline: " + this.deadline + "\n" +
+                "\t" + "Owner: " + this.owner + "\n" +
+                "\t" + "State: " + this.state + "\n";
     }
 
     @Override

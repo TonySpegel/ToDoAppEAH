@@ -82,9 +82,9 @@ public class Birthday extends Item {
 
     @Override
     public String display() {
-
-        //TODO Ausgabe
-        return this.toString();
+        return "(Birthday) " + this.name + ":" + "\n" +
+                "\t" + "Description: " + this.description + "\n" +
+                "\t" + "Deadline: " + this.birthday + "\n";
     }
 
     @Override
