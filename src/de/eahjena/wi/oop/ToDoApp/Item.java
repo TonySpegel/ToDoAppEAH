@@ -44,8 +44,8 @@ public class Item {
 
         // CSV Comma separated value
         // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";
-        output += output + name + ";";
-        output += output + description + ";";
+        output += this.name + ";";
+        output += this.description + ";";
 
         return output;
     }

@@ -33,7 +33,13 @@ public class Birthday extends Item {
         output += super.save();
 
         // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET";
-        output += birthday.toString() + ";";
+        if (birthday != null) {
+            output += birthday.toString();
+        } else {
+            output += "\"\"";
+        }
+        // Oneliner alternative: output += birthday != null ? birthday.toString() : "\"\"";
+        output += ";"; // The closing ";" for the birthday field
         return output;
     }
 

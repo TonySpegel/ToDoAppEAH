@@ -74,16 +74,9 @@ public class ToDoApp {
                 }
 
                 // Create Birthday
-                case "b": {
-                    createBirthdayItem(usrInput);
-                    break;
-                }
-
-                case "e":
-                default:
-                    // Benutzerende
-                    // leave switch, not yet the while loop
-                    break;
+                case "b" -> createBirthdayItem(userInput);
+                // case "e"
+                default -> { /* Benutzerende */ }
             }
 
             // print the complete list
