@@ -10,10 +10,12 @@ import static de.eahjena.wi.oop.ToDoApp.ToDo.STATE_OPEN;
 public class ToDoApp {
     @SuppressWarnings("unused") // Might be used in the future
     final static String TAG = "ToDoApp";
+
     /**
      * Holds items
      */
     public static ArrayList<Item> itemList = new ArrayList<>();
+
     /**
      * Filename for storing items
      */
@@ -67,7 +69,11 @@ public class ToDoApp {
                 // List all ToDos and Birthdays
                 case "l" -> listEntries();
                 // case "e"
-                default -> { /* Benutzerende */ }
+                default -> {
+                    // Benutzerende
+                    // Only exiting switch statement.
+                    // Loop exit is checked later
+                }
             }
 
             // leave application
@@ -78,6 +84,7 @@ public class ToDoApp {
         // end of application
         saveItemsToDisk();
     }
+    /* end of main */
 
     private static void listEntries() {
         final String displayAllItems = itemListToString(itemList);
@@ -130,24 +137,24 @@ public class ToDoApp {
         itemList.add(todo);
     }
 
-    private static void createBirthdayItem(Scanner usrInput) {
+    private static void createBirthdayItem(Scanner userInput) {
         System.out.println("Bitte geben Sie folgende Daten ein:");
 
         Birthday birthday = new Birthday();
 
         // name
         System.out.println("Geburtstagskind: ");
-        String name = usrInput.nextLine();
+        String name = userInput.nextLine();
         birthday.setName(name);
 
         // description
         System.out.println("Geburtstagswünsche: ");
-        final String description = usrInput.nextLine();
+        final String description = userInput.nextLine();
         birthday.setDescription(description);
 
         // birthday: Date
         System.out.println("Geburtstag: ");
-        final String sBirthday = usrInput.nextLine();
+        final String sBirthday = userInput.nextLine();
         try {
             birthday.setBirthday(sBirthday);
         } catch (final InvalidDateException e) {
@@ -169,7 +176,9 @@ public class ToDoApp {
     private static void saveItemsToDisk() {
         /* ********************************** */
         // save list of items
-        try (PrintWriter outDatei = new PrintWriter(new FileWriter(FILENAME_DATASTORAGE))) {
+        PrintWriter outDatei = null;
+        try {
+            outDatei = new PrintWriter(new FileWriter(FILENAME_DATASTORAGE));
 
             StringBuilder output = new StringBuilder();
             for (final Item item : itemList) {
@@ -186,6 +195,8 @@ public class ToDoApp {
         } catch (final IOException exception) {
             System.out.println("Error in writing to file " + FILENAME_DATASTORAGE + ". Permisions?");
 
+        } finally {
+            if (outDatei != null) outDatei.close();
         }
         // end save list of items
         /* ********************************** */
