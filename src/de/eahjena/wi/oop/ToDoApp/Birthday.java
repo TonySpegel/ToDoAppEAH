@@ -27,14 +27,19 @@ public class Birthday extends Item {
     @Override
     public String save() {
         // which type we are
+        //0
         String output = TAG+";";
 
+        // 1, 2
         // parent data, here Item
         output += super.save();
 
+        //3
         // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET";
         if (birthday != null) {
-            output += birthday.toString();
+            // output += birthday.toString(); liefert "Wed Sep 23 00:00:00 CEST 2020"
+            // liefert
+            output += simpleDateFormat.format(birthday);
         } else {
             output += "\"\"";
         }
@@ -42,8 +47,21 @@ public class Birthday extends Item {
         output += ";"; // The closing ";" for the birthday field
         return output;
     }
-
-
+    
+    final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    @Override
+    void load( String[] tokens ){
+        super.load( tokens );
+        
+        String sBirthday = tokens[3];
+        try {
+            birthday = simpleDateFormat.parse( sBirthday );
+        } catch (ParseException e) {
+            //fehlerhaftes Datum.
+        }
+    }
+    
+    
     public Date getBirthday() {
         return birthday;
     }

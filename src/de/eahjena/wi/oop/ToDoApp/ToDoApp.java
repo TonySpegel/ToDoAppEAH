@@ -28,7 +28,11 @@ public class ToDoApp {
     public static void main(String[] args) {
         printWelcome();
         printHelp();
+        
         loadItemsFromDisk();
+        
+        System.out.println("Eingelesene Aufgaben und Geburtstage:");
+        printList( itemList );
 
         /**
          * Begin demo
@@ -40,10 +44,12 @@ public class ToDoApp {
         final Birthday aBirthday = new Birthday("Michael Stepping", "Er mag 'Mon Chéri'", null);
 
         // Add items to itemList
+        /**
         itemList.add(newEntry);
         itemList.add(secondEntry);
         itemList.add(thirdEntry);
         itemList.add(aBirthday);
+        **/
         // End demo
     
         // we need only one instance
@@ -67,6 +73,8 @@ public class ToDoApp {
                 case "t" -> createToDoItem(userInput);
                 // Create Birthday
                 case "b" -> createBirthdayItem(userInput);
+                // Auusgabe Liste
+                case "l"->printList( itemList );
                 // case "e"
                 default -> {
                     // Benutzerende
@@ -173,22 +181,21 @@ public class ToDoApp {
     private static void saveItemsToDisk() {
         /* ********************************** */
         // save list of items
+        String output = "";
+        for (final Item item : itemList) {
+            // objektorientierte Nutzung
+            // sammele alle einzelnen Rückgaben in einem großen String
+            // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET"; \n
+            // Jeder einzelne Datensatz wird mit einem Zeilenumbruch beendet
+            output += item.save() + "\n";
+        }
+
         PrintWriter outDatei = null;
         try {
             outDatei = new PrintWriter(new FileWriter(FILENAME_DATASTORAGE));
-
-            String output = "";
-            for (final Item item : itemList) {
-                // objektorientierte Nutzung
-                // sammele alle einzelnen Rückgaben in einem großen String
-                // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET"; \n
-                // Jeder einzelne Datensatz wird mit einem Zeilenumbruch beendet
-                output += item.save() + "\n";
-            }
             // now we iterated through all objects and collected the output
             // write all information finally to the file
             outDatei.println(output);
-
         } catch (final IOException exception) {
             System.out.println("Error in writing to file " + FILENAME_DATASTORAGE + ". Permisions?");
 
@@ -214,11 +221,14 @@ public class ToDoApp {
             while ((sCSVLineForObject = inDatei.readLine()) != null) {
                 // Jede Zeile ist ein Objekt.
                 
-                // wir müssen hier das erste Element auslesen, damit wir wissen, welches Objekt wir instanziieren müssen.
-                // Eine kleine Factory.
-                Item item = Item.create( sCSVLineForObject );
-                
-                itemList.add( item );
+                // leere Zeilen überspringen
+                if ( ! sCSVLineForObject.isBlank() ) {
+                    // wir müssen hier das erste Element auslesen, damit wir wissen, welches Objekt wir instanziieren müssen.
+                    // Eine kleine Factory.
+                    Item item = Item.create(sCSVLineForObject);
+    
+                    itemList.add(item);
+                }
             }
         } catch (IOException ioException) {
             System.out.println("Konnte Datei " + FILENAME_DATASTORAGE + " nicht öffnen. Keine Objekte geladen.");

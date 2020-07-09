@@ -1,5 +1,7 @@
 package de.eahjena.wi.oop.ToDoApp;
 
+import com.sun.jdi.IntegerValue;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +36,8 @@ public class ToDo extends Item {
     public ToDo() {
     }
 
+    
+    
     // Constructor
     public ToDo(final String name, final String description, Date deadline, String owner, int state) {
         super(description, name);
@@ -47,26 +51,55 @@ public class ToDo extends Item {
     // CSV Comma separated value
     @Override
     public String save() {
+        // 0
         // which type we are
         String output = TAG + ";";
 
+        // 1, 2
         // parent data, here Item
         output += super.save();
 
+        // 3
         // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET";
         if (deadline != null) {
-            output += deadline.toString();
+            // output += deadline.toString(); liefert "Wed Sep 23 00:00:00 CEST 2020"
+            // liefert
+            output += simpleDateFormat.format(deadline);
         } else {
             output += "\"\"";
         }
         // Oneliner alternative: output += deadline != null ? deadline.toString() : "\"\"";
         output += ";"; // The closing ";" for the deadline field
+        // 4
         output += owner + ";";
+        //5
         output += state + ";";
 
         return output;
     }
+    
+    final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    @Override
+    void load( String[] tokens ){
 
+        // token 1, 2
+        super.load( tokens );
+
+        // 3
+        String sDeadline = tokens[3];
+        try {
+            deadline = simpleDateFormat.parse( sDeadline );
+        } catch (ParseException e) {
+            //fehlerhaftes Datum.
+        }
+        
+        // 4
+        owner = tokens[4];
+        // 5
+        state = Integer.parseInt( tokens[5] );
+        
+    }
+    
     public Date getDeadline() {
         return deadline;
     }

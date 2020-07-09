@@ -37,26 +37,29 @@ public class Item {
         
         //Get all tokens available in line
         String[] tokens = CSVLineOfObject.split(DELIMITER);
-        for(String token : tokens)
+        // first columns is the name of the object
+        //später for(String token : tokens)
+        switch (tokens[0])
         {
-            //Print all tokens
-            System.out.println(token);
-            
             // je nach ObjectType instanziieren;
-            item = new Birthday();
-            item = new ToDo();
-        
+            // bessser TAG als "Birthday"
+            case Birthday.TAG->{
+                item = new Birthday( );
+            }
+            // bessser TAG als "To_Do"
+            case ToDo.TAG->{
+                item = new ToDo( );
+            }
         }
-        
-
-        
+        item.load( tokens );
         
         return item;
     }
     
-    
-    
-    /* Methods */
+        
+        
+        
+        /* Methods */
     public void setName(String name) {
         this.name = name;
     }
@@ -83,6 +86,13 @@ public class Item {
         output += this.description + ";";
 
         return output;
+    }
+
+    // override in subclasses
+    void load( String[] tokens ){
+        //1
+        this.name = tokens[1];
+        this.description = tokens[2];
     }
 
 
