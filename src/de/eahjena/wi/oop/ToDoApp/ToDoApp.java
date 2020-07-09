@@ -8,6 +8,7 @@ import java.util.Scanner;
 import static de.eahjena.wi.oop.ToDoApp.ToDo.STATE_OPEN;
 
 public class ToDoApp {
+    @SuppressWarnings("unused") // Might be used in the future
     final static String TAG = "ToDoApp";
     /**
      * Holds items
@@ -164,17 +165,15 @@ public class ToDoApp {
     private static void saveItemsToDisk() {
         /* ********************************** */
         // save list of items
-        PrintWriter outDatei = null;
-        try {
-            outDatei = new PrintWriter(new FileWriter(FILENAME_DATASTORAGE));
+        try (PrintWriter outDatei = new PrintWriter(new FileWriter(FILENAME_DATASTORAGE))) {
 
-            String output = "";
+            StringBuilder output = new StringBuilder();
             for (final Item item : itemList) {
                 // objektorientierte Nutzung
                 // sammele alle einzelnen Rückgaben in einem großen String
                 // Ausgabe: "Küche putzen";"Putzmittel nicht vergessen";"05.01.2020 12:43CET"; \n
                 // Jeder einzelne Datensatz wird mit einem Zeilenumbruch beendet
-                output += item.save() + "\n";
+                output.append(item.save()).append("\n");
             }
             // now we iterated through all objects and collected the output
             // write all information finally to the file
@@ -183,8 +182,6 @@ public class ToDoApp {
         } catch (final IOException exception) {
             System.out.println("Error in writing to file " + FILENAME_DATASTORAGE + ". Permisions?");
 
-        } finally {
-            if (outDatei != null) outDatei.close();
         }
         // end save list of items
         /* ********************************** */
@@ -209,7 +206,7 @@ public class ToDoApp {
         } finally {
             if (inDatei != null) try {
                 inDatei.close();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
         }
     }
@@ -220,15 +217,15 @@ public class ToDoApp {
     // prozeduraler Aufruf!
     public static String printList(final List<Item> itemList) {
         // String used to print all items in itemList
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         // Gehe durch alle Objekte Item durch und sage den Objekten, sie sollen sich anzeigen.
         for (final Item item : itemList) {
             // objektorientierte Nutzung
             // sammele alle einzelnen Rückgaben in einem großen String
-            output += item.display() + "\n";
+            output.append(item.display()).append("\n");
         }
-        return output;
+        return output.toString();
     }
 
     /**
