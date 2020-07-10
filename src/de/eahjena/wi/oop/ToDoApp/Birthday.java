@@ -118,9 +118,10 @@ public class Birthday extends Item {
     @Override
     public String display() {
         String formattedBirthday =  birthday != null ? dateFormat.format(birthday) : "null";
-        return "(Birthday) " + this.name + ":\n" +
+        return "(" + TAG +") " + this.name + ":\n" +
                 "\t" + "Description: " + this.description + "\n" +
-                "\t" + "Birthday: " + formattedBirthday + "\n";
+                "\t" + "Birthday: " + formattedBirthday + "\n" +
+                "\t" + "Age: " + this.age + "\n";
     }
 
     @Override
@@ -129,6 +130,7 @@ public class Birthday extends Item {
         final String superText = super.toString();
         final String text = superText + "ToDo{" +
                 ", birthday=" + this.birthday +
+                ", age=" + this.age +
                 '}';
         return text;
     }
