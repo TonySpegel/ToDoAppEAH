@@ -100,9 +100,10 @@ public class Birthday extends Item {
 
     @Override
     public String display() {
-
-        //TODO Ausgabe
-        return this.toString();
+        String formattedBirthday =  birthday != null ? dateFormat.format(birthday) : "null";
+        return "(Birthday) " + this.name + ":\n" +
+                "\t" + "Description: " + this.description + "\n" +
+                "\t" + "Birthday: " + formattedBirthday + "\n";
     }
 
     @Override
