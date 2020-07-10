@@ -268,8 +268,10 @@ public class ToDoApp {
     public static void printHelp() {
         // Ausgabe der Tastaturkommandos
         System.out.println("h: help");
+        System.out.println("l: list all entries");
         System.out.println("b: create a birthday");
         System.out.println("t: create a ToDo Item");
+        System.out.println("d: delete an entry");
         System.out.println("e: exit");
     }
 
