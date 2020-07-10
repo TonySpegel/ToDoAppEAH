@@ -134,4 +134,9 @@ public class Birthday extends Item {
                 '}';
         return text;
     }
+
+    @Override
+    public String getType() {
+        return Birthday.TAG;
+    }
 }

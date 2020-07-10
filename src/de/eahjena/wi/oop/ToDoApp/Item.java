@@ -115,4 +115,9 @@ public class Item {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    // virtual
+    public String getType() {
+        return Item.TAG;
+    }
 }

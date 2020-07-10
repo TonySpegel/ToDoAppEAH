@@ -165,4 +165,9 @@ public class ToDo extends Item {
                 '}';
         return text;
     }
+
+    @Override
+    public String getType() {
+        return ToDo.TAG;
+    }
 }
