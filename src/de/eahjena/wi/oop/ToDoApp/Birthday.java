@@ -105,4 +105,13 @@ public class Birthday extends Item {
         return this.toString();
     }
 
+    @Override
+    public String toString() {
+        // Do not forget the output of the parent class
+        final String superText = super.toString();
+        final String text = superText + "ToDo{" +
+                ", birthday=" + this.birthday +
+                '}';
+        return text;
+    }
 }
