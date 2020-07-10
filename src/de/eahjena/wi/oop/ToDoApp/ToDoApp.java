@@ -35,13 +35,12 @@ public class ToDoApp {
          * Begin demo
          * ============================================
          */
+        /*
         final ToDo newEntry = new ToDo("Katze füttern", "Katzenfutter kaufen", null, "ich", STATE_OPEN);
         final ToDo secondEntry = new ToDo("Aufräumen", "Zimmer aufräumen", null, "WG Kollege", STATE_OPEN);
         final ToDo thirdEntry = new ToDo("Einkaufen", "Ist genug Bier da?", null, "Trinkwart", STATE_OPEN);
         final Birthday aBirthday = new Birthday("Michael Stepping", "Er mag 'Mon Chéri'", null);
-
         // Add items to itemList
-        /**
         itemList.add(newEntry);
         itemList.add(secondEntry);
         itemList.add(thirdEntry);
@@ -70,6 +69,8 @@ public class ToDoApp {
                 case "t" -> createToDoItem(userInput);
                 // Create Birthday
                 case "b" -> createBirthdayItem(userInput);
+                // Delete Entry
+                case "d" -> deleteEntry(userInput);
                 // Auusgabe Liste
                 case "l"-> {
                     final String entries = printList(itemList);
@@ -91,9 +92,25 @@ public class ToDoApp {
 
         // end of application
         saveItemsToDisk();
-    }
-    /* end of main */
+    }/* end of main */
 
+    private static void deleteEntry(Scanner userInput) {
+        System.out.println("Alle Einträge:");
+        for (int i = 0; i < itemList.size(); i++) {
+            Item currentItem = itemList.get(i);
+            System.out.println(i + ") " + currentItem.getType() + " -> " + currentItem.getName());
+        }
+        System.out.println("Welcher Eintrag soll gelöscht werden?");
+        int userSelection = userInput.nextInt();
+        // Remove enter from keyboard buffer
+        userInput.nextLine();
+
+        try {
+            itemList.remove(userSelection);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Die Eingabe war fehlerhaft. Bitte versuchen Sie es nochmal");
+        }
+    }
 
     private static void createToDoItem(Scanner userInput) {
         System.out.println("Bitte geben Sie folgende Daten ein:");
