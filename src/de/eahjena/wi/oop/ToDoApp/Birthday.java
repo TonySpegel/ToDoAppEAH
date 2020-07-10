@@ -128,7 +128,7 @@ public class Birthday extends Item {
     public String toString() {
         // Do not forget the output of the parent class
         final String superText = super.toString();
-        final String text = superText + "ToDo{" +
+        final String text = superText + TAG + "{" +
                 ", birthday=" + this.birthday +
                 ", age=" + this.age +
                 '}';
