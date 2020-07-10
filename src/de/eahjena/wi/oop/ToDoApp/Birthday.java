@@ -2,6 +2,8 @@ package de.eahjena.wi.oop.ToDoApp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 
 public class Birthday extends Item {
@@ -11,6 +13,7 @@ public class Birthday extends Item {
     //name
     //description
     protected Date birthday;
+    protected int age;
 
     //default constructor
     public Birthday() {
@@ -21,6 +24,7 @@ public class Birthday extends Item {
 
         super(name, description);
         this.birthday = birthday;
+        this.age = calculateAge();
     }
 
     // CSV Comma separated value
@@ -55,7 +59,8 @@ public class Birthday extends Item {
         
         String sBirthday = tokens[3];
         try {
-            birthday = simpleDateFormat.parse( sBirthday );
+            this.birthday = simpleDateFormat.parse( sBirthday );
+            this.age = calculateAge();
         } catch (ParseException e) {
             //fehlerhaftes Datum.
         }
@@ -68,6 +73,7 @@ public class Birthday extends Item {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+        this.age = calculateAge();
     }
 
     // format: TT.MM.JJ(JJ)
@@ -85,16 +91,27 @@ public class Birthday extends Item {
         }
 
         this.birthday = myBirthday;
+        this.age = calculateAge();
     }
 
 
     public int getAge() {
+        return this.age;
+    }
 
-        // TODO Alter berechnen
-        // println( TAG, "setAge: %d", age);
+    private int calculateAge() {
+        // If no birthday is set, we obviously can't calculate an age
+        if (birthday == null) {
+            return 0;
+        }
 
-        // age: today - birthdate
-        return 42;
+        Instant birthdayInstant = this.birthday.toInstant();
+        Instant nowInstant = Instant.now();
+
+        Duration timeDifference = Duration.between(birthdayInstant, nowInstant);
+
+        // Neglecting leap years since no one lives long enough to make a difference here
+        return (int) timeDifference.toDays() / 365;
     }
 
 
