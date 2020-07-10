@@ -31,9 +31,6 @@ public class ToDoApp {
         
         loadItemsFromDisk();
         
-        System.out.println("Eingelesene Aufgaben und Geburtstage:");
-        printList( itemList );
-
         /**
          * Begin demo
          * ============================================
@@ -74,7 +71,10 @@ public class ToDoApp {
                 // Create Birthday
                 case "b" -> createBirthdayItem(userInput);
                 // Auusgabe Liste
-                case "l"->printList( itemList );
+                case "l"-> {
+                    final String entries = printList(itemList);
+                    System.out.println(entries);
+                }
                 // case "e"
                 default -> {
                     // Benutzerende
@@ -82,10 +82,6 @@ public class ToDoApp {
                     // Loop exit is checked later
                 }
             }
-
-            // print the complete list
-            final String displayAllItems = printList(itemList);
-            System.out.println(displayAllItems);
 
             // leave application
             //trick: "e" is a string, which is present. (choice) could be null.
@@ -246,15 +242,15 @@ public class ToDoApp {
     // prozeduraler Aufruf!
     public static String printList(final List<Item> itemList) {
         // String used to print all items in itemList
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         // Gehe durch alle Objekte Item durch und sage den Objekten, sie sollen sich anzeigen.
         for (final Item item : itemList) {
             // objektorientierte Nutzung
             // sammele alle einzelnen Rückgaben in einem großen String
-            output += item.display() + "\n";
+            output.append(item.display()).append("\n");
         }
-        return output;
+        return output.toString();
     }
 
     /**
