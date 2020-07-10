@@ -1,7 +1,5 @@
 package de.eahjena.wi.oop.ToDoApp;
 
-import com.sun.jdi.IntegerValue;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -148,9 +146,12 @@ public class ToDo extends Item {
 
     @Override
     public String display() {
-
-        //TODO Ausgabe
-        return this.toString();
+        String formattedDeadline = deadline != null ? dateFormat.format(deadline) : "null";
+        // new SimpleDateFormat().
+        return "(" + TAG + ") " + this.name + ":\n" +
+                "\t" + "Description: " + this.description + "\n" +
+                "\t" + "Deadline: " + formattedDeadline + "\n" +
+                "\t" + "State: " + this.state + "\n";
     }
 
     @Override
