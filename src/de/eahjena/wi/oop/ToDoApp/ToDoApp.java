@@ -75,6 +75,16 @@ public class ToDoApp {
                 case "l"-> {
                     final String entries = printList(itemList);
                     System.out.println(entries);
+                    // springe zum while
+                    continue;
+                }
+                case "x" -> {
+                    final String entries = printListTodo(itemList);
+                    System.out.println(entries);
+                }
+                case "y" -> {
+                    final String entries = printListBirthday(itemList);
+                    System.out.println(entries);
                 }
                 // case "e"
                 default -> {
@@ -86,8 +96,11 @@ public class ToDoApp {
 
             // leave application
             //trick: "e" is a string, which is present. (choice) could be null.
-            if ("e".equals(choice))
+            //if (choice.equals("e")) { normal thinking!
+            if ("e".equals(choice)) {
+                // break aus der While Schleife
                 break;
+            }
         }
 
         // end of application
@@ -269,7 +282,41 @@ public class ToDoApp {
         }
         return output.toString();
     }
-
+    
+    
+    public static String printListBirthday(final List<Item> itemList) {
+        // String used to print all items in itemList
+        StringBuilder output = new StringBuilder();
+        
+        // Gehe durch alle Objekte Item durch und sage den Objekten, sie sollen sich anzeigen.
+        for (final Item item : itemList) {
+            
+            if ( item instanceof Birthday ) {
+                // objektorientierte Nutzung
+                // sammele alle einzelnen Rückgaben in einem großen String
+                output.append(item.display()).append("\n");
+            }
+        }
+        return output.toString();
+    }
+    
+    public static String printListTodo(final List<Item> itemList) {
+        // String used to print all items in itemList
+        StringBuilder output = new StringBuilder();
+        
+        // Gehe durch alle Objekte Item durch und sage den Objekten, sie sollen sich anzeigen.
+        for (final Item item : itemList) {
+            
+            if ( item instanceof ToDo ) {
+                // objektorientierte Nutzung
+                // sammele alle einzelnen Rückgaben in einem großen String
+                output.append(item.display()).append("\n");
+            }
+        }
+        return output.toString();
+    }
+    
+    
     /**
      * Prints welcome message on app start up
      */
