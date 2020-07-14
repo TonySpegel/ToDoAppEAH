@@ -22,7 +22,7 @@ public class ToDo extends Item {
     public final static int STATE_DRINKMORE_BEER = 2;
     public final static int STATE_DONE = 9;
 
-    final static String TAG = "ToDo";
+    public final static String TAG = "ToDo";
     final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
     protected Date deadline;
@@ -86,15 +86,15 @@ public class ToDo extends Item {
         // 3
         String sDeadline = tokens[3];
         try {
-            deadline = simpleDateFormat.parse( sDeadline );
+            this.deadline = simpleDateFormat.parse( sDeadline );
         } catch (ParseException e) {
             //fehlerhaftes Datum.
         }
         
         // 4
-        owner = tokens[4];
+        this.owner = tokens[4];
         // 5
-        state = Integer.parseInt( tokens[5] );
+        this.state = Integer.parseInt( tokens[5] );
         
     }
     
@@ -146,7 +146,7 @@ public class ToDo extends Item {
 
     @Override
     public String display() {
-        String formattedDeadline = deadline != null ? dateFormat.format(deadline) : "null";
+        String formattedDeadline = (deadline != null) ? dateFormat.format(deadline) : "null";
         // new SimpleDateFormat().
         return "(" + TAG + ") " + this.name + ":\n" +
                 "\t" + "Description: " + this.description + "\n" +

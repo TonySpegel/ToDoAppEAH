@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.Date;
 
 public class Birthday extends Item {
-    final static String TAG = "Birthday";
+    public final static String TAG = "Birthday";
     final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     // from superclass
     //name
@@ -108,10 +108,12 @@ public class Birthday extends Item {
         Instant birthdayInstant = this.birthday.toInstant();
         Instant nowInstant = Instant.now();
 
-        Duration timeDifference = Duration.between(birthdayInstant, nowInstant);
+        final Duration timeDifference = Duration.between(birthdayInstant, nowInstant);
 
         // Neglecting leap years since no one lives long enough to make a difference here
-        return (int) timeDifference.toDays() / 365;
+        final long days = timeDifference.toDays();
+        final float years = days / 365 ;
+        return (int) years ;
     }
 
 

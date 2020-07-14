@@ -4,7 +4,7 @@ package de.eahjena.wi.oop.ToDoApp;
 // superclass for all Items like Birthday or ToDo
 public class Item {
 
-    final static String TAG = "Item";
+    public final static String TAG = "Item";
     //Delimiter used in CSV file
     final static String DELIMITER = ";";
     
