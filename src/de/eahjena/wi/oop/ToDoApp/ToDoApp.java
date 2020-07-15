@@ -106,13 +106,20 @@ public class ToDoApp {
         // end of application
         saveItemsToDisk();
     }/* end of main */
-
+    /**
+     * Deletes entries by index of an
+     * array by using remove()
+     *
+     * deleteEntry as UML:
+     * - deleteEntry(userInput: Scanner): void
+     */
     private static void deleteEntry(Scanner userInput) {
         System.out.println("Alle Einträge:");
         for (int i = 0; i < itemList.size(); i++) {
             Item currentItem = itemList.get(i);
             System.out.println(i + ") " + currentItem.getType() + " -> " + currentItem.getName());
         }
+
         System.out.println("Welcher Eintrag soll gelöscht werden?");
         int userSelection = userInput.nextInt();
         // Remove enter from keyboard buffer
@@ -270,7 +277,7 @@ public class ToDoApp {
 
     // Print items in itemList:
     // prozeduraler Aufruf!
-    public static String printList(final List<Item> itemList) {
+    private static String printList(final List<Item> itemList) {
         // String used to print all items in itemList
         StringBuilder output = new StringBuilder();
 
@@ -282,9 +289,8 @@ public class ToDoApp {
         }
         return output.toString();
     }
-    
-    
-    public static String printListBirthday(final List<Item> itemList) {
+
+    private static String printListBirthday(final List<Item> itemList) {
         // String used to print all items in itemList
         StringBuilder output = new StringBuilder();
         
@@ -299,8 +305,8 @@ public class ToDoApp {
         }
         return output.toString();
     }
-    
-    public static String printListTodo(final List<Item> itemList) {
+
+    private static String printListTodo(final List<Item> itemList) {
         // String used to print all items in itemList
         StringBuilder output = new StringBuilder();
         
@@ -315,12 +321,11 @@ public class ToDoApp {
         }
         return output.toString();
     }
-    
-    
+
     /**
      * Prints welcome message on app start up
      */
-    public static void printWelcome() {
+    private static void printWelcome() {
         System.out.println("+---------- ToDoApp EAH ----------+");
         System.out.println("|   Manage things and birthdays   |");
         System.out.println("+---------------------------------+");
@@ -329,7 +334,7 @@ public class ToDoApp {
     /**
      * Prints available commands
      */
-    public static void printHelp() {
+    private static void printHelp() {
         // Ausgabe der Tastaturkommandos
         System.out.println("h: help");
         System.out.println("l: list all entries");

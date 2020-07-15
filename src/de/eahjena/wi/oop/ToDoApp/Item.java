@@ -43,11 +43,11 @@ public class Item {
         {
             // je nach ObjectType instanziieren;
             // bessser TAG als "Birthday"
-            case Birthday.TAG->{
+            case Birthday.TAG -> {
                 item = new Birthday( );
             }
             // bessser TAG als "To_Do"
-            case ToDo.TAG->{
+            case ToDo.TAG -> {
                 item = new ToDo( );
             }
         }
