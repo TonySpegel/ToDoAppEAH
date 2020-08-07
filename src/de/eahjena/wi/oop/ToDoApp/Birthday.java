@@ -78,7 +78,7 @@ public class Birthday extends Item {
 
     // format: TT.MM.JJ(JJ)
     public void setBirthday(final String sBirthday) throws InvalidDateException {
-        Date myBirthday = new Date();
+        final Date myBirthday;
 
         try {
             myBirthday = dateFormat.parse(sBirthday);

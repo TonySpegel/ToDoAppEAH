@@ -50,6 +50,9 @@ public class Item {
             case ToDo.TAG -> {
                 item = new ToDo( );
             }
+            default -> {
+                return null;
+            }
         }
         item.load( tokens );
         
@@ -103,8 +106,9 @@ public class Item {
     public String display() {
 
         // Diese Vaterklasse soll nie eine Ausgabe machen.
-        new AssertionError( false );
-        return null;
+        throw new AssertionError( false );
+        
+        //return null;
     }
 
 

@@ -14,12 +14,12 @@ public class ToDoApp {
     /**
      * Holds items
      */
-    public static ArrayList<Item> itemList = new ArrayList<>();
+    public static final ArrayList<Item> itemList = new ArrayList<>();
 
     /**
      * Filename for storing items
      */
-    public static String FILENAME_DATASTORAGE = "TodoApp.csv";
+    public static final String FILENAME_DATASTORAGE = "TodoApp.csv";
 
     /**
      * Main method. App entry
@@ -164,7 +164,7 @@ public class ToDoApp {
         // state: enum
         try {
             todo.setState(STATE_OPEN);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
         // alternative: erst alle Eingaben validieren und dann das Objekt erzeugen
@@ -268,7 +268,7 @@ public class ToDoApp {
         } finally {
             if (inDatei != null) try {
                 inDatei.close();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
         }
     }

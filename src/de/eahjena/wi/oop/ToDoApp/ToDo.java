@@ -103,7 +103,7 @@ public class ToDo extends Item {
     }
 
     public void setDeadline(final String deadlineString) throws InvalidDateException {
-        Date myDeadline = new Date();
+        final Date myDeadline ;
 
         // convert String to Date
         try {
